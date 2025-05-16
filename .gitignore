@@ -1,0 +1,20 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Visual Studio files
+.vscode/
+*.vs/
+
+# Ignore logs
+*.log
+
+# Ignore secrets
+appsettings.Development.json
+secrets.json

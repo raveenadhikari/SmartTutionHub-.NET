@@ -1,0 +1,25 @@
+/* Ensure page stretches full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Wrapper takes full height and arranges content vertically */
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Content grows to take space */
+main {
+    flex: 1;
+}
+
+/* Footer stays at bottom */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
