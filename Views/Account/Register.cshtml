@@ -1,0 +1,94 @@
+﻿@model SmartTutionHub.ViewModels.RegisterVm
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+<form asp-action="Register" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" class="form-control">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth" class="form-control" type="date" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <label asp-for="NIC"></label>
+            <input asp-for="NIC" class="form-control" />
+            <span asp-validation-for="NIC" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Phone"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <label asp-for="UserType"></label>
+            <select asp-for="UserType" class="form-control">
+                <option>Student</option>
+                <option>Tutor</option>
+            </select>
+            <span asp-validation-for="UserType" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <label asp-for="Password"></label>
+            <div class="input-group">
+                <input asp-for="Password" class="form-control" type="password" id="pwd" />
+                <button type="button" class="btn btn-outline-secondary" onclick="togglePwd()">👁️</button>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ConfirmPassword"></label>
+            <div class="input-group">
+                <input asp-for="ConfirmPassword" class="form-control" type="password" id="cpwd" />
+                <button type="button" class="btn btn-outline-secondary" onclick="toggleCpwd()">👁️</button>
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4">Register</button>
+</form>
+
+@section Scripts {
+    <script>
+        function togglePwd() {
+            var x = document.getElementById("pwd");
+            x.type = (x.type === "password") ? "text" : "password";
+        }
+        function toggleCpwd() {
+            var x = document.getElementById("cpwd");
+            x.type = (x.type === "password") ? "text" : "password";
+        }
+    </script>
+}

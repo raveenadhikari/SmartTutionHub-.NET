@@ -1,17 +1,11 @@
 ﻿@{
     Layout = "_Layout";
-}
-
-@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Welcome";
 }
 
 <div class="text-center mt-5">
-    <h1 class="display-4">Welcome to Smart Tuition Hub!</h1>
-    <p class="lead">Find and manage A/L and O/L tuition classes in Sri Lanka with ease.</p>
-
-    <div class="mt-4">
-        <a class="btn btn-primary btn-lg" asp-controller="Course" asp-action="Index">Browse Courses</a>
-        <a class="btn btn-outline-secondary btn-lg" asp-controller="Account" asp-action="Login">Login</a>
-    </div>
+    <h1 class="display-4">Welcome to TuitionHubLK</h1>
+    <p class="lead">Connect with trusted A/L & O/L tutors, manage bookings, and streamline your learning journey.</p>
+    <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Register">Get Started</a>
+    <a class="btn btn-outline-secondary btn-lg" asp-controller="Account" asp-action="Login">Login</a>
 </div>

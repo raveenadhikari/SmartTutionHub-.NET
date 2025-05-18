@@ -8,7 +8,7 @@
         public required Course Course { get; set; }
 
         public int StudentId { get; set; }
-        public required User Student { get; set; }
+        public required ApplicationUser Student { get; set; }
 
         public int Rating { get; set; } // 1-5
 

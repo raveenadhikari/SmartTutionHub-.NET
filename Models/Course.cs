@@ -23,7 +23,7 @@ namespace SmartTutionHub.Models
         public int TutorId { get; set; }
 
         [ForeignKey("TutorId")]
-        public required User Tutor { get; set; }
+        public required ApplicationUser Tutor { get; set; }
 
         public ICollection<Booking>? Bookings { get; set; }
         public ICollection<Review>? Reviews { get; set; }
