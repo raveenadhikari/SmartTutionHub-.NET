@@ -1,0 +1,47 @@
+﻿@model SmartTutionHub.ViewModels.ProfileVm
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "_Layout";
+}
+<h2>@Model.FullName</h2>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div>
+        <img src="@(string.IsNullOrEmpty(Model.ProfileImagePath) ? "/images/profile-avatar.jpg" : Model.ProfileImagePath)"
+             style="width:300px;height:300px;border-radius:60px;" />
+        <input type="file" asp-for="ProfileImage" accept="image/*" />
+    </div>
+    <div>
+        <label>Full Name</label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+    <div>
+        <label>Email:</label>
+        <span>@Model.Email</span>
+    </div>
+    <div>
+        <label>Role:</label>
+        <span>@Model.Role</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+<hr />
+@if (Model.Role == "Tutor")
+{
+    <h3>My Classes</h3>
+    <ul>
+        @foreach (var c in Model.MyClasses)
+        {
+            <li>@c.Subject (@c.Description)</li>
+        }
+    </ul>
+}
+else
+{
+    <h3>Enrolled Classes</h3>
+    <ul>
+        @foreach (var c in Model.MyClasses)
+        {
+            <li>@c.Subject (@c.Description)</li>
+        }
+    </ul>
+}

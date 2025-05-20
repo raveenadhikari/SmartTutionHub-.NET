@@ -20,5 +20,7 @@ namespace SmartTutionHub.Models
 
         [Required]
         public required string Role { get; set; } // Student or Tutor
+
+        public string? ProfileImagePath { get; set; }
     }
 }

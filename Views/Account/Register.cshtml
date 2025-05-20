@@ -66,6 +66,10 @@
                 <button type="button" class="btn btn-outline-secondary" onclick="togglePwd()">👁️</button>
             </div>
             <span asp-validation-for="Password" class="text-danger"></span>
+            <small class="form-text text-muted">
+				Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+            </small>
+
         </div>
         <div class="col-md-6">
             <label asp-for="ConfirmPassword"></label>

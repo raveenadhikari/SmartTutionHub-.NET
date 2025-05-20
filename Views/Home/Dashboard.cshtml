@@ -1,7 +1,139 @@
-﻿@{
+﻿@model SmartTutionHub.Models.ApplicationUser
+@{
     Layout = "_Layout";
-    ViewData["Title"] = "Dashboard";
+    var myClasses = ViewBag.MyClasses as List<SmartTutionHub.Models.Class>;
 }
 
-<h2>Hello, @User.Identity.Name!</h2>
-<p>Use the menu above to browse courses, view your bookings, or manage your profile.</p>
+@if (Model.Role == "Tutor")
+{
+    <h2>Welcome, @Model.FullName!</h2>
+
+    <!-- Add Class Widget -->
+    <div class="card my-4 p-3 text-center">
+        <h4>Add New Class</h4>
+        <button class="btn btn-success" onclick="showAddClassForm()">+ Add Class</button>
+    </div>
+
+    <!-- Modal for Add Class -->
+    <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form asp-action="AddClass" asp-controller="Home" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Class</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- All form fields go here, for brevity just a few below: -->
+                        <div class="mb-3">
+                            <label class="form-label">Level</label>
+                            <select name="Level" class="form-control" required>
+                                <option disabled selected>Select Level</option>
+                                <option>Grade 5</option>
+                                <option>O/L</option>
+                                <option>A/L</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tutor Name</label>
+                            <input name="TutorName" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Qualification</label>
+                            <input name="Qualification" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input name="Subject" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Grade/Year</label>
+                            <input name="GradeOrYear" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Medium</label>
+                            <select name="Medium" class="form-control" required>
+                                <option disabled selected>Select Medium</option>
+                                <option>English</option>
+                                <option>Sinhala</option>
+                                <option>Tamil</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Class Type</label>
+                            <select name="ClassType" class="form-control" required>
+                                <option disabled selected>Select Type</option>
+                                <option>Individual</option>
+                                <option>Hall</option>
+                                <option>Group</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time & Date</label>
+                            <input name="ClassTime" type="datetime-local" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">To Be Discussed</label>
+                            <div class="form-check">
+                                <input type="checkbox" name="ToBeDiscussed" class="form-check-input" id="toBeDiscussed" value="true" />
+                                <label class="form-check-label" for="toBeDiscussed">Mark if time/date to be discussed</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Short Description (max 200 words)</label>
+                            <textarea name="Description" class="form-control" maxlength="200" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Thumbnail Image</label>
+                            <input type="file" name="Thumbnail" class="form-control" accept="image/*" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gallery Photos (you can select multiple)</label>
+                            <input type="file" name="Photos" class="form-control" accept="image/*" multiple />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Class</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAddClassForm() {
+            var modal = new bootstrap.Modal(document.getElementById('addClassModal'));
+            modal.show();
+        }
+    </script>
+
+    <!-- My Classes Widget -->
+    <div class="card my-4">
+        <div class="card-header">My Classes</div>
+        <div class="card-body">
+            @if (myClasses != null && myClasses.Any())
+            {
+                <ul>
+                    @foreach (var c in myClasses)
+                    {
+                        <li>@c.Subject - @c.Description</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>You have no classes yet. Add one!</p>
+            }
+        </div>
+    </div>
+
+    <a class="btn btn-outline-info" href="/Courses/Browse">Browse All Classes</a>
+}
+else
+{
+    <!-- Student dashboard (show enrolled/booked classes) -->
+    <h2>Welcome, @Model.FullName!</h2>
+    <p>Your enrolled classes will be shown here.</p>
+    <!-- Similar pattern as above for students -->
+}
